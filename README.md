@@ -15,6 +15,9 @@
 
 可通过修改 **LOCAL_ENDPOINT_PORT** 宏定义来调整服务监听端口，示例程序中的默认端口是  8888。
 
+serverDemo 运行示范效果：  
+![](serverDemo.png)
+
 ### clientDemo
 客户端端示例程序。
 
@@ -22,3 +25,6 @@
 
 1. 可通过修改 **SERVER_ENDPOINT_IP** 宏定义来指定要连接的服务器 IP 地址（在运行  serverDemo 的机器上通过 `ipconfig` 或 `ifconfig` 命令可获取本机 IP）；  
 2. 通过修改 **SERVER_ENDPOINT_PORT** 宏定义来指定要连接的服务器端口，与 serverDemo 中指定的 **LOCAL_ENDPOINT_PORT** 对应。
+
+serverDemo 运行示范效果：  
+![](clientDemo.png)
