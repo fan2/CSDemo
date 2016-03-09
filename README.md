@@ -1,5 +1,5 @@
 ## 基于socket的C/S通信示例
-本工程为《[WinSock编程基础](http://blog.csdn.net/phunxm/article/details/5085869)》的第四节TCP C/S通信示例代码。
+本工程为《[WinSock编程基础](http://blog.csdn.net/phunxm/article/details/5085869)》的第四节TCP C/S通信示例代码，基于默认的同步阻塞 I/O 模型。
 
 该示范程序模拟了一个最简化的 C/S 交互流程。  
 客户端请求的 HTTP Request 报文和服务器返回的 HTTP Response 报文摘自《[TCP通信流程解析](http://blog.csdn.net/phunxm/article/details/5836034)》中抓包请求百度首页的 TCP 流。
@@ -11,12 +11,14 @@
 ### serverDemo
 服务器端示例程序。
 
-有客户连接上之后，被动等待客户请求（模拟 HTTP REQUEST），然后回包（模拟 HTTP RESPONSE）。
+有客户连接上之后，被动等待客户请求（模拟 HTTP REQUEST），然后回包（模拟 HTTP RESPONSE），关闭连接。
 
 可通过修改 **LOCAL_ENDPOINT_PORT** 宏定义来调整服务监听端口，示例程序中的默认端口是  8888。
 
 serverDemo 运行示范效果：  
 ![](serverDemo.png)
+
+处理完一个客户后，可按下 <kbd>q</kbd> 键退出，或按其他任意键继续进入下一轮  while(true) 循环。此时，可重新启动一个 clientDemo 再次测试。
 
 ### clientDemo
 客户端端示例程序。
