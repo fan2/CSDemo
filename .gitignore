@@ -1,0 +1,6 @@
+.DS_Store
+*.sdf
+*.suo
+Debug/
+xcuserdata/
+DerivedData/
