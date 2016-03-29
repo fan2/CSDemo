@@ -10,7 +10,7 @@
 #include <string.h>
 #include <time.h>
 
-#if defined(_OS_WIN_) || defined(WIN32) || defined(WIN64)
+#ifdef _MSC_VER // #if defined(_OS_WIN_) || defined(WIN32) || defined(WIN64)
 
 #include <WINSOCK.H>
 #pragma comment(lib, "WSOCK32.LIB")  // wsock32.dll
@@ -103,9 +103,9 @@ int main(int argc, char* argv[])
     }
     
     // Fill the local sockaddr_in structure, which the listenSocket will bind to.
-    struct sockaddr_in sin;
-#if	defined(_OS_MAC_)
-    servAddr.sin_len = sizeof(addr);
+    struct sockaddr_in sin = {0};
+#if __APPLE__ // #if	defined(_OS_MAC_)
+    sin.sin_len = sizeof(sin);
 #endif
     sin.sin_family = AF_INET;
     sin.sin_port = htons(LOCAL_ENDPOINT_PORT);

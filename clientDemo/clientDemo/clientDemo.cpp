@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#if defined(_OS_WIN_) || defined(WIN32) || defined(WIN64)
+#ifdef _MSC_VER // #if defined(_OS_WIN_) || defined(WIN32) || defined(WIN64)
 
 #include <WINSOCK.H>
 #pragma comment(lib, "WSOCK32.LIB")  // wsock32.dll
@@ -61,7 +61,7 @@ private:
 
 
 
-#define SERVER_ENDPOINT_IP      inet_addr("10.18.84.102") // "127.0.0.1"
+#define SERVER_ENDPOINT_IP      inet_addr("127.0.0.1") // "10.18.84.102"
 #define SERVER_ENDPOINT_PORT    8888
 
 // 摘自《TCP通信流程解析》中的请求百度首页报文。
@@ -92,9 +92,9 @@ int main(int argc, char* argv[])
     // This demo connect to localhost.
     // Call function bind to associate a specified local address with the socket
     // before connect operation in the case of Multi-NIC.
-    struct sockaddr_in servAddr;
-#if	defined(_OS_MAC_)
-    servAddr.sin_len = sizeof(addr);
+    struct sockaddr_in servAddr = {0};
+#if __APPLE__ // #if	defined(_OS_MAC_)
+    servAddr.sin_len = sizeof(servAddr);
 #endif
     servAddr.sin_family = AF_INET;
     servAddr.sin_port = htons(SERVER_ENDPOINT_PORT);
