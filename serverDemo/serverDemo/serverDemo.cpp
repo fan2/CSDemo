@@ -6,6 +6,7 @@
 //  Copyright © 2016年 faner. All rights reserved.
 //
 
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -30,7 +31,7 @@ int loadSocketLibrary()
     if (WSAStartup(sockVersion, &wsaData)) // Initiates failure
     {
         ReportCSError(WSAStartup());
-        return -1;
+        return EXIT_FAILURE;
     }
     
     return 0;
@@ -99,7 +100,7 @@ int main(int argc, char* argv[])
     {
         ReportCSError(socket());
         WSACleanup(); // Terminates use of the wsock32.dll
-        return -1;
+        return EXIT_FAILURE;
     }
     
     // Fill the local sockaddr_in structure, which the listenSocket will bind to.
@@ -116,7 +117,7 @@ int main(int argc, char* argv[])
     {
         ReportCSError(bind());
         WSACleanup(); // Terminates use of the wsock32.dll
-        return -1;
+        return EXIT_FAILURE;
     }
     
     // getLocalAddr
@@ -131,7 +132,7 @@ int main(int argc, char* argv[])
     {
         ReportCSError(listen());
         WSACleanup(); // Terminates use of the wsock32.dll
-        return -1;
+        return EXIT_FAILURE;
     }
     
     // Create a sockaddr_in structure to contain the client's address information
@@ -189,15 +190,15 @@ int main(int argc, char* argv[])
     {
         ReportCSError(closesocket());
         WSACleanup();
-        return -1;
+        return EXIT_FAILURE;
     }
     
     // terminates use of the wsock32.dll
     if (WSACleanup() == SOCKET_ERROR)
     {
         ReportCSError(WSACleanup());
-        return -1;
+        return EXIT_FAILURE;
     }
     
-    return 0; // normal exit
+    return EXIT_SUCCESS; // normal exit
 }

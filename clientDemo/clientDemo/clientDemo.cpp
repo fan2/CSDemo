@@ -6,6 +6,7 @@
 //  Copyright © 2016年 faner. All rights reserved.
 //
 
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -84,7 +85,7 @@ int main(int argc, char* argv[])
     if(clientSocket == INVALID_SOCKET) // Socket creation failure
     {
         ReportCSError(socket());
-        return -1;
+        return EXIT_FAILURE;
     }
     
     // Fill the sockaddr_in structure,
@@ -106,7 +107,7 @@ int main(int argc, char* argv[])
     if(connect(clientSocket, (sockaddr*)&servAddr, sizeof(servAddr)) == SOCKET_ERROR)
     {
         ReportCSError(connect());
-        return -1;
+        return EXIT_FAILURE;
     }
     
     // Send request to the server
@@ -115,7 +116,7 @@ int main(int argc, char* argv[])
     if (nTobeSend != nSend) // simply suppose exactly over
     {
         ReportCSError(send());
-        return -1;
+        return EXIT_FAILURE;
     }
     else
     {
@@ -138,5 +139,5 @@ int main(int argc, char* argv[])
         return 1;
     }
     
-    return 0; // normal exit
+    return EXIT_SUCCESS; // normal exit
 }
